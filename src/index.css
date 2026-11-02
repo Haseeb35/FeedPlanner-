@@ -1,0 +1,158 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --app-bg: #f6f5f2;
+  --app-surface: #ffffff;
+  --app-subtle: #efede8;
+  --app-line: #e3e0d9;
+  --app-line-strong: #cfcac0;
+  --app-fg: #1b1916;
+  --app-muted: #69645b;
+  --app-accent: #c4472a;
+  --app-accent-hover: #ab3b21;
+  --app-accent-fg: #ffffff;
+  --app-accent-soft: #fbe9e3;
+  --app-danger: #b42318;
+  --app-success: #2f7d4f;
+  --app-ring: #c4472a;
+  --app-shadow: 0 1px 2px rgb(27 25 22 / 0.04), 0 8px 24px -12px rgb(27 25 22 / 0.12);
+  color-scheme: light;
+}
+
+.dark {
+  --app-bg: #111110;
+  --app-surface: #191917;
+  --app-subtle: #23221f;
+  --app-line: #2c2b27;
+  --app-line-strong: #3d3b36;
+  --app-fg: #f2f0eb;
+  --app-muted: #a39e94;
+  --app-accent: #f0805f;
+  --app-accent-hover: #f59878;
+  --app-accent-fg: #1e0d06;
+  --app-accent-soft: #3a2119;
+  --app-danger: #f27a6e;
+  --app-success: #6cc792;
+  --app-ring: #f0805f;
+  --app-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -12px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: 'Inter Variable', Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --color-bg: var(--app-bg);
+  --color-surface: var(--app-surface);
+  --color-subtle: var(--app-subtle);
+  --color-line: var(--app-line);
+  --color-line-strong: var(--app-line-strong);
+  --color-fg: var(--app-fg);
+  --color-muted: var(--app-muted);
+  --color-accent: var(--app-accent);
+  --color-accent-hover: var(--app-accent-hover);
+  --color-accent-fg: var(--app-accent-fg);
+  --color-accent-soft: var(--app-accent-soft);
+  --color-danger: var(--app-danger);
+  --color-success: var(--app-success);
+  --color-ring: var(--app-ring);
+  --shadow-soft: var(--app-shadow);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-bg text-fg font-sans;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  :focus-visible {
+    outline: 2px solid var(--app-ring);
+    outline-offset: 2px;
+  }
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+  dialog::backdrop {
+    background: rgb(17 17 16 / 0.45);
+    backdrop-filter: blur(2px);
+  }
+  ::selection {
+    background: var(--app-accent-soft);
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-lg px-3.5 text-sm font-medium whitespace-nowrap transition-colors duration-150 disabled:pointer-events-none disabled:opacity-45;
+  }
+  .btn-primary {
+    @apply bg-accent text-accent-fg hover:bg-accent-hover;
+  }
+  .btn-secondary {
+    @apply border border-line bg-surface text-fg hover:border-line-strong hover:bg-subtle;
+  }
+  .btn-ghost {
+    @apply text-fg hover:bg-subtle;
+  }
+  .btn-danger {
+    @apply bg-danger text-white hover:opacity-90 dark:text-[#1e0d06];
+  }
+  .btn-icon {
+    @apply h-9 w-9 px-0;
+  }
+  .field {
+    @apply block w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm text-fg transition-colors placeholder:text-muted/70 hover:border-line-strong focus:border-accent focus:outline-none focus-visible:outline-none focus:ring-2 focus:ring-accent/25;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-medium text-muted;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold tracking-[0.08em] text-muted uppercase;
+  }
+}
+
+@keyframes fp-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fp-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fp-fade-up 220ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.animate-pop {
+  animation: fp-pop 180ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
