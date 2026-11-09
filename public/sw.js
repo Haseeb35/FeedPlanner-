@@ -4,8 +4,9 @@
  * hashed build assets are served from the cache first. Only same-origin GET requests
  * are handled; nothing is ever sent anywhere.
  */
-const CACHE = 'feedplanner-v2'
-const SHELL = ['/', '/manifest.webmanifest', '/favicon.svg', '/icon-192.png', '/icon-512.png']
+const CACHE = 'feedplanner-v3'
+// Paths are relative to this file, so the app works at / and under a sub-path (GitHub Pages).
+const SHELL = ['./', 'manifest.webmanifest', 'favicon.svg', 'icon-192.png', 'icon-512.png']
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)))
@@ -37,10 +38,10 @@ self.addEventListener('fetch', (event) => {
       fetch(request)
         .then((response) => {
           const copy = response.clone()
-          caches.open(CACHE).then((cache) => cache.put('/', copy))
+          caches.open(CACHE).then((cache) => cache.put('./', copy))
           return response
         })
-        .catch(() => caches.match('/', { ignoreVary: true })),
+        .catch(() => caches.match('./', { ignoreVary: true })),
     )
     return
   }

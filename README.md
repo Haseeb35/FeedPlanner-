@@ -8,6 +8,12 @@
 </p>
 
 <p align="center">
+  <a href="https://haseeb35.github.io/FeedPlanner-/">
+    <img src="docs/images/live-demo.png" alt="Try the live demo: haseeb35.github.io/FeedPlanner-" width="320" height="76">
+  </a>
+</p>
+
+<p align="center">
   <img alt="React 19" src="https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white">
   <img alt="Vite" src="https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white">
